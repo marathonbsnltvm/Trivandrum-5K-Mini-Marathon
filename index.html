@@ -505,14 +505,14 @@
 </head>
 <body class="splash-lock">
 
-<div id="race-splash" role="dialog" aria-label="Race countdown">
+<div id="race-splash" role="dialog" aria-label="Registration deadline">
   <div class="splash-inner">
-    <div class="splash-badge">⏱ Limited Time</div>
-    <div class="splash-days" id="splash-days">7</div>
-    <div class="splash-label" id="splash-label">Days Left</div>
-    <p class="splash-msg">Only <strong id="splash-days-word">7 days</strong> left for the race.<br>Register now — or it's gone!</p>
-    <p class="splash-fun" id="splash-fun">Your 4:30 AM alarm is already judging you…</p>
-    <a href="https://shorturl.at/qMRMt" target="_blank" rel="noopener" class="splash-cta">🎽 Register Now</a>
+    <div class="splash-badge" id="splash-badge">🚨 Last Chance</div>
+    <div class="splash-days" id="splash-days">—</div>
+    <div class="splash-label" id="splash-label">Until Registration Closes</div>
+    <p class="splash-msg" id="splash-msg">Registration closes <strong>tonight at 11:59 PM</strong>.<br>Register now — or it's gone!</p>
+    <p class="splash-fun" id="splash-fun">After midnight, the gate is shut. No exceptions.</p>
+    <a href="https://shorturl.at/qMRMt" target="_blank" rel="noopener" class="splash-cta" id="splash-cta">🎽 Register Now</a>
     <div class="splash-progress-wrap" aria-hidden="true"><div class="splash-progress-bar" id="splash-progress"></div></div>
     <button type="button" class="splash-skip" id="splash-skip">Skip →</button>
   </div>
@@ -759,9 +759,9 @@
 
 <section id="register" class="reveal">
   <div class="cta-box">
-    <div class="fee-tag">🧒 Kids: ₹399 &nbsp;|&nbsp; 🐦 Early Bird: ₹599 (till 27 Sep 2026) &nbsp;|&nbsp; After: ₹700</div>
+    <div class="fee-tag">🧒 Kids: ₹399 &nbsp;|&nbsp; Adults: ₹700 &nbsp;|&nbsp; 🚨 Closes tonight 11:59 PM</div>
     <h2>Ready to Run?</h2>
-    <p>Registrations open 21 September 2026 — register within the first 7 days to lock in the early bird price!</p>
+    <p>Registration closes <strong>today, 4 October 2026, at 11:59 PM</strong>. After that, no more entries — register now!</p>
     <div style="margin-top:28px;font-size:13px;color:rgba(255,255,255,0.85);">
       📍 Start &amp; Finish: <strong>BSNL Kerala Circle Office, PMG, Trivandrum</strong><br>
       📞 Queries: <a href="https://wa.me/919447499099" target="_blank" rel="noopener" style="color:#fff;font-weight:700;text-decoration:underline;">9447499099</a> &nbsp;|&nbsp; <a href="https://wa.me/919449014055" target="_blank" rel="noopener" style="color:#fff;font-weight:700;text-decoration:underline;">9449014055</a> &nbsp;<span style="opacity:0.8;">(tap to WhatsApp)</span>
@@ -889,11 +889,13 @@
   }, { threshold:0.12 });
   revealEls.forEach(el=>observer.observe(el));
 
-  /* Opening splash: progress bar, rotating lines, skip, sessionStorage */
+  /* Opening splash: reg closes 4 Oct 2026 23:59 IST — progress, fun lines, skip, sessionStorage */
   (function(){
-    const SPLASH_KEY = 'bsnl5k_splash_seen';
+    const SPLASH_KEY = 'bsnl5k_splash_regclose_v1';
     const DURATION = 4000;
     const splash = document.getElementById('race-splash');
+    // Registration deadline: 4 Oct 2026, 11:59 PM IST (UTC+5:30)
+    const regClose = new Date('2026-10-04T23:59:00+05:30').getTime();
 
     function dismissSplash(){
       if(!splash || splash.classList.contains('hide')) return;
@@ -903,7 +905,6 @@
       setTimeout(function(){ if(splash && splash.parentNode) splash.remove(); }, 900);
     }
 
-    // Already seen this session → skip entirely
     try {
       if(sessionStorage.getItem(SPLASH_KEY)){
         if(splash) splash.remove();
@@ -912,40 +913,70 @@
       }
     } catch(e){}
 
-    const raceDay = new Date('2026-10-11T05:00:00').getTime();
-    const daysLeft = Math.max(0, Math.ceil((raceDay - Date.now()) / (1000*60*60*24)));
+    const now = Date.now();
+    const closed = now >= regClose;
     const daysEl = document.getElementById('splash-days');
     const labelEl = document.getElementById('splash-label');
-    const wordEl = document.getElementById('splash-days-word');
-    if(daysEl){
-      if(daysLeft === 0){
-        daysEl.textContent = 'TODAY';
-        daysEl.style.fontSize = 'clamp(42px,11vw,72px)';
-        if(labelEl) labelEl.textContent = 'Race Day!';
-        if(wordEl) wordEl.textContent = 'hours';
-        const msg = document.querySelector('#race-splash .splash-msg');
-        if(msg) msg.innerHTML = 'It\'s <strong>race day</strong>!<br>Register now — or it\'s gone!';
-      } else {
-        daysEl.textContent = String(daysLeft);
-        if(labelEl) labelEl.textContent = daysLeft === 1 ? 'Day Left' : 'Days Left';
-        if(wordEl) wordEl.textContent = daysLeft === 1 ? '1 day' : (daysLeft + ' days');
-      }
-    }
-
-    const funLines = [
-      'Your 4:30 AM alarm is already judging you…',
-      'Medal doesn\'t collect itself. Just saying.',
-      'Trivandrum wakes at 5 AM. Will you?',
-      '5K, not 5 excuses.',
-      'Zumba will start with or without you.',
-      'Bib numbers are not infinite. Fair warning.',
-      'Parents: Kids category is ₹399. Kids: tell them.',
-      'Don\'t walk this one out — run it.'
-    ];
+    const msgEl = document.getElementById('splash-msg');
+    const badgeEl = document.getElementById('splash-badge');
+    const ctaEl = document.getElementById('splash-cta');
     const funEl = document.getElementById('splash-fun');
+
+    let funLines;
+
+    if(closed){
+      if(badgeEl) badgeEl.textContent = '🔒 Closed';
+      if(daysEl){
+        daysEl.textContent = 'CLOSED';
+        daysEl.style.fontSize = 'clamp(36px,10vw,64px)';
+      }
+      if(labelEl) labelEl.textContent = 'Registration Ended';
+      if(msgEl) msgEl.innerHTML = 'Registration closed on <strong>4 Oct at 11:59 PM</strong>.<br>See you on race day — 11 October!';
+      if(ctaEl){
+        ctaEl.textContent = 'Race Day: 11 Oct';
+        ctaEl.removeAttribute('href');
+        ctaEl.style.pointerEvents = 'none';
+        ctaEl.style.opacity = '0.85';
+      }
+      funLines = [
+        'The form is closed. The 5K is not.',
+        'Too late to register — not too late to cheer.',
+        'Race day is still 11 October. Set that alarm.',
+        'Bib list is final. See you at PMG.'
+      ];
+    } else {
+      const msLeft = regClose - now;
+      const hrs = Math.floor(msLeft / (1000*60*60));
+      const mins = Math.floor((msLeft % (1000*60*60)) / (1000*60));
+      if(daysEl){
+        if(hrs >= 1){
+          daysEl.textContent = String(hrs);
+          if(labelEl) labelEl.textContent = hrs === 1 ? 'Hour Left' : 'Hours Left';
+        } else {
+          daysEl.textContent = String(Math.max(1, mins));
+          if(labelEl) labelEl.textContent = mins === 1 ? 'Minute Left' : 'Minutes Left';
+        }
+      }
+      if(msgEl){
+        const timeBit = hrs >= 1
+          ? (hrs + ' hour' + (hrs===1?'':'s') + (mins ? ' ' + mins + ' min' : ''))
+          : (Math.max(1, mins) + ' minute' + (mins===1?'':'s'));
+        msgEl.innerHTML = 'Registration closes <strong>tonight at 11:59 PM</strong> — about <strong>' + timeBit + '</strong> left.<br>Register now — or it\'s gone!';
+      }
+      funLines = [
+        'After midnight, the gate is shut. No exceptions.',
+        'Last night to grab your bib slot.',
+        '11:59 PM tonight. Not “tomorrow morning”.',
+        'Your future self at 5 AM wants you registered.',
+        'Kids category ₹399 — still open until midnight.',
+        'Don\'t be the one who “meant to register”.'
+      ];
+    }
+    if(funEl && funLines.length) funEl.textContent = funLines[0];
+
     let funIdx = 0;
     const funTimer = setInterval(function(){
-      if(!funEl) return;
+      if(!funEl || !funLines.length) return;
       funEl.classList.add('fade');
       setTimeout(function(){
         funIdx = (funIdx + 1) % funLines.length;
@@ -957,8 +988,8 @@
     const bar = document.getElementById('splash-progress');
     const t0 = performance.now();
     let raf;
-    function tick(now){
-      const p = Math.min(1, (now - t0) / DURATION);
+    function tick(t){
+      const p = Math.min(1, (t - t0) / DURATION);
       if(bar) bar.style.width = (p * 100) + '%';
       if(p < 1) raf = requestAnimationFrame(tick);
       else dismissSplash();
@@ -973,8 +1004,6 @@
         dismissSplash();
       });
     }
-
-    // Safety: always clear fun timer on dismiss path after duration
     setTimeout(function(){ clearInterval(funTimer); }, DURATION + 200);
   })();
 </script>
