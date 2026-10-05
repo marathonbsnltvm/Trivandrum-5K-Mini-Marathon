@@ -505,14 +505,14 @@
 </head>
 <body class="splash-lock">
 
-<div id="race-splash" role="dialog" aria-label="Registration deadline">
+<div id="race-splash" role="dialog" aria-label="Registration closed">
   <div class="splash-inner">
-    <div class="splash-badge" id="splash-badge">🚨 Last Chance</div>
-    <div class="splash-days" id="splash-days">—</div>
-    <div class="splash-label" id="splash-label">Until Registration Closes</div>
-    <p class="splash-msg" id="splash-msg">Registration closes <strong>tonight at 11:59 PM</strong>.<br>Register now — or it's gone!</p>
-    <p class="splash-fun" id="splash-fun">After midnight, the gate is shut. No exceptions.</p>
-    <a href="https://shorturl.at/qMRMt" target="_blank" rel="noopener" class="splash-cta" id="splash-cta">🎽 Register Now</a>
+    <div class="splash-badge" id="splash-badge">🔒 Registration Closed</div>
+    <div class="splash-days" id="splash-days">11</div>
+    <div class="splash-label" id="splash-label">October — Race Day</div>
+    <p class="splash-msg" id="splash-msg">Registration is <strong>over</strong>. Stay on this website for the latest updates.<br>Be ready — the 5K is on <strong>11 October</strong>!</p>
+    <p class="splash-fun" id="splash-fun">Bib collection details & race-day tips will appear here.</p>
+    <a href="#schedule" class="splash-cta" id="splash-cta">📅 Race Day Info</a>
     <div class="splash-progress-wrap" aria-hidden="true"><div class="splash-progress-bar" id="splash-progress"></div></div>
     <button type="button" class="splash-skip" id="splash-skip">Skip →</button>
   </div>
@@ -528,7 +528,7 @@
     <a href="#route">Route</a>
     <a href="#faq">FAQ</a>
   </div>
-  <a href="https://shorturl.at/qMRMt" target="_blank" class="nav-cta">Register</a>
+  <a href="#schedule" class="nav-cta">Race Day</a>
 </nav>
 
 <section class="hero">
@@ -540,7 +540,7 @@
     <p class="sub">Lace up and join runners from across the city for a morning of energy, community, and pure runner's high through the streets of Trivandrum.</p>
     <div class="organizer">Organized by BSNL Trivandrum BA &nbsp;•&nbsp; Registrations open from 21 September 2026</div>
     <div class="hero-buttons">
-      <a href="https://shorturl.at/qMRMt" target="_blank" class="btn-primary">🎽 Register Now</a>
+      <a href="#schedule" class="btn-primary">📅 Race Day Info</a>
       <a href="#schedule" class="btn-secondary">View Schedule</a>
     </div>
 
@@ -759,9 +759,9 @@
 
 <section id="register" class="reveal">
   <div class="cta-box">
-    <div class="fee-tag">🧒 Kids: ₹399 &nbsp;|&nbsp; Adults: ₹700 &nbsp;|&nbsp; 🚨 Closes tonight 11:59 PM</div>
-    <h2>Ready to Run?</h2>
-    <p>Registration closes <strong>today, 4 October 2026, at 11:59 PM</strong>. After that, no more entries — register now!</p>
+    <div class="fee-tag">🔒 Registration Closed &nbsp;|&nbsp; 🏃 Race Day: 11 October 2026, 5:00 AM</div>
+    <h2>You're In — Get Race Ready</h2>
+    <p>Registration is closed. Stay on this website for bib collection, schedule updates, and race-day tips. See you on <strong>11 October</strong>!</p>
     <div style="margin-top:28px;font-size:13px;color:rgba(255,255,255,0.85);">
       📍 Start &amp; Finish: <strong>BSNL Kerala Circle Office, PMG, Trivandrum</strong><br>
       📞 Queries: <a href="https://wa.me/919447499099" target="_blank" rel="noopener" style="color:#fff;font-weight:700;text-decoration:underline;">9447499099</a> &nbsp;|&nbsp; <a href="https://wa.me/919449014055" target="_blank" rel="noopener" style="color:#fff;font-weight:700;text-decoration:underline;">9449014055</a> &nbsp;<span style="opacity:0.8;">(tap to WhatsApp)</span>
@@ -856,7 +856,7 @@
 
 </footer>
 
-<a href="https://shorturl.at/qMRMt" target="_blank" class="sticky-cta btn-primary">🎽 Register Now</a>
+<a href="#schedule" class="sticky-cta btn-primary">📅 Race Day Info</a>
 
 <script>
   document.querySelectorAll('.faq-q').forEach(q=>{
@@ -891,7 +891,7 @@
 
   /* Opening splash: reg closes 4 Oct 2026 23:59 IST — progress, fun lines, skip, sessionStorage */
   (function(){
-    const SPLASH_KEY = 'bsnl5k_splash_regclose_v1';
+    const SPLASH_KEY = 'bsnl5k_splash_closed_v2';
     const DURATION = 4000;
     const splash = document.getElementById('race-splash');
     // Registration deadline: 4 Oct 2026, 11:59 PM IST (UTC+5:30)
@@ -925,24 +925,27 @@
     let funLines;
 
     if(closed){
-      if(badgeEl) badgeEl.textContent = '🔒 Closed';
+      if(badgeEl) badgeEl.textContent = '🔒 Registration Closed';
       if(daysEl){
-        daysEl.textContent = 'CLOSED';
-        daysEl.style.fontSize = 'clamp(36px,10vw,64px)';
+        daysEl.textContent = '11';
+        daysEl.style.fontSize = '';
       }
-      if(labelEl) labelEl.textContent = 'Registration Ended';
-      if(msgEl) msgEl.innerHTML = 'Registration closed on <strong>4 Oct at 11:59 PM</strong>.<br>See you on race day — 11 October!';
+      if(labelEl) labelEl.textContent = 'October — Race Day';
+      if(msgEl) msgEl.innerHTML = 'Registration is <strong>over</strong>. Keep in touch on this website for the latest updates.<br>Be ready for the race — <strong>11 October, 5:00 AM</strong> at PMG!';
       if(ctaEl){
-        ctaEl.textContent = 'Race Day: 11 Oct';
-        ctaEl.removeAttribute('href');
-        ctaEl.style.pointerEvents = 'none';
-        ctaEl.style.opacity = '0.85';
+        ctaEl.textContent = '📅 Race Day Info';
+        ctaEl.setAttribute('href', '#schedule');
+        ctaEl.removeAttribute('target');
+        ctaEl.style.pointerEvents = '';
+        ctaEl.style.opacity = '';
+        ctaEl.addEventListener('click', function(){ dismissSplash(); });
       }
       funLines = [
-        'The form is closed. The 5K is not.',
-        'Too late to register — not too late to cheer.',
-        'Race day is still 11 October. Set that alarm.',
-        'Bib list is final. See you at PMG.'
+        'Bib collection details will be posted here — stay tuned.',
+        'Race day is 11 October. Set that 4:30 AM alarm.',
+        'Check this site for venue, schedule & last-minute tips.',
+        'The form is closed. The 5K is very much on.',
+        'See you at BSNL Kerala Circle Office, PMG!'
       ];
     } else {
       const msLeft = regClose - now;
