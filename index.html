@@ -762,6 +762,69 @@
     position:fixed;inset:0;pointer-events:none;z-index:9998;
   }
 
+
+  /* Event photo gallery 2026 */
+  .gal-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:14px;
+    margin:28px 0 20px;
+  }
+  .gal-item{
+    margin:0;
+    border-radius:16px;
+    overflow:hidden;
+    background:#0f2328;
+    border:1px solid var(--line);
+    box-shadow:0 8px 24px rgba(15,35,40,0.08);
+    cursor:pointer;
+    position:relative;
+    aspect-ratio:4/3;
+    transition:transform .3s, box-shadow .3s;
+  }
+  .gal-item:hover{
+    transform:translateY(-4px) scale(1.01);
+    box-shadow:0 16px 40px rgba(15,35,40,0.15);
+  }
+  .gal-item img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .45s;
+  }
+  .gal-item:hover img{ transform:scale(1.06); }
+  .gal-item figcaption{
+    position:absolute;left:0;right:0;bottom:0;
+    padding:28px 12px 10px;
+    background:linear-gradient(transparent,rgba(0,0,0,0.75));
+    color:#fff;font-size:12px;font-weight:600;line-height:1.35;
+    opacity:0;transition:opacity .3s;
+  }
+  .gal-item:hover figcaption{ opacity:1; }
+  .gal-note{
+    text-align:center;font-size:13px;color:var(--muted);margin-top:8px;
+  }
+  /* Lightbox */
+  #gal-lb{
+    display:none;position:fixed;inset:0;z-index:10000;
+    background:rgba(8,16,20,0.92);align-items:center;justify-content:center;
+    padding:20px;cursor:zoom-out;
+  }
+  #gal-lb.open{ display:flex; }
+  #gal-lb img{
+    max-width:min(1100px,96vw);max-height:88vh;
+    border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    object-fit:contain;
+  }
+  #gal-lb .lb-cap{
+    position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+    color:#fff;font-size:14px;font-weight:600;text-align:center;
+    max-width:90vw;text-shadow:0 2px 8px #000;
+  }
+  #gal-lb .lb-close{
+    position:absolute;top:16px;right:20px;
+    background:rgba(255,255,255,0.15);border:0;color:#fff;
+    width:40px;height:40px;border-radius:50%;font-size:22px;cursor:pointer;
+  }
+
   body.splash-lock{ overflow:hidden; }
 
 </style>
@@ -1131,26 +1194,121 @@
 
 
 <section id="gallery" class="reveal">
-  <h2 class="section-title">Glimpses from Last Year</h2>
-  <p class="section-sub">Relive the energy of Edition 1 — watch the highlight reel and browse the full photo album.</p>
+  <h2 class="section-title">Race Day Gallery — 2026</h2>
+  <p class="section-sub">From Zumba to the medal stage — moments from BSNL 5K Mini Marathon, 11 October 2026. More photos coming soon.</p>
 
-  <div style="max-width:800px;margin:0 auto 40px;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 50px rgba(15,35,40,0.12);">
-    <div style="position:relative;padding-top:56.25%;">
-      <iframe src="https://www.youtube.com/embed/zbDHdd5mqno" title="BSNL 5K Mini Marathon — Last Year Highlights" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+  <div class="gal-grid">
+    <figure class="gal-item" data-full="gallery/MCP01700.jpg">
+      <img src="gallery/MCP01700.jpg" alt="Zumba warm-up under the lights — BSNL Circle Office" loading="lazy" width="800" height="600">
+      <figcaption>Zumba warm-up under the lights — BSNL Circle Office</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP01705.jpg">
+      <img src="gallery/MCP01705.jpg" alt="Energy on the ground — pre-race Zumba" loading="lazy" width="800" height="600">
+      <figcaption>Energy on the ground — pre-race Zumba</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP01928.jpg">
+      <img src="gallery/MCP01928.jpg" alt="Focus mode — runners ready at the venue" loading="lazy" width="800" height="600">
+      <figcaption>Focus mode — runners ready at the venue</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP01996.jpg">
+      <img src="gallery/MCP01996.jpg" alt="At the line — PMG start zone" loading="lazy" width="800" height="600">
+      <figcaption>At the line — PMG start zone</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP01997.jpg">
+      <img src="gallery/MCP01997.jpg" alt="START / FINISH arch — flag off moment" loading="lazy" width="800" height="600">
+      <figcaption>START / FINISH arch — flag off moment</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02001.jpg">
+      <img src="gallery/MCP02001.jpg" alt="They're off! Sparks and the surge of the pack" loading="lazy" width="800" height="600">
+      <figcaption>They're off! Sparks and the surge of the pack</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02036.jpg">
+      <img src="gallery/MCP02036.jpg" alt="Chief Guest & dignitaries with the chequered flag" loading="lazy" width="800" height="600">
+      <figcaption>Chief Guest & dignitaries with the chequered flag</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02041.jpg">
+      <img src="gallery/MCP02041.jpg" alt="Smiles at the start — official flag-off" loading="lazy" width="800" height="600">
+      <figcaption>Smiles at the start — official flag-off</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02046.jpg">
+      <img src="gallery/MCP02046.jpg" alt="Team BSNL & guests — race day pride" loading="lazy" width="800" height="600">
+      <figcaption>Team BSNL & guests — race day pride</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02048.jpg">
+      <img src="gallery/MCP02048.jpg" alt="5K Marathon flag raised high" loading="lazy" width="800" height="600">
+      <figcaption>5K Marathon flag raised high</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02631.jpg">
+      <img src="gallery/MCP02631.jpg" alt="On course — determined strides" loading="lazy" width="800" height="600">
+      <figcaption>On course — determined strides</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02653.jpg">
+      <img src="gallery/MCP02653.jpg" alt="Powering through the city streets" loading="lazy" width="800" height="600">
+      <figcaption>Powering through the city streets</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02657.jpg">
+      <img src="gallery/MCP02657.jpg" alt="Joy in every kilometre" loading="lazy" width="800" height="600">
+      <figcaption>Joy in every kilometre</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02668.jpg">
+      <img src="gallery/MCP02668.jpg" alt="Steady pace, strong form" loading="lazy" width="800" height="600">
+      <figcaption>Steady pace, strong form</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02684.jpg">
+      <img src="gallery/MCP02684.jpg" alt="Pushing toward the finish" loading="lazy" width="800" height="600">
+      <figcaption>Pushing toward the finish</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02690.jpg">
+      <img src="gallery/MCP02690.jpg" alt="Victory fist — pure celebration" loading="lazy" width="800" height="600">
+      <figcaption>Victory fist — pure celebration</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02711.jpg">
+      <img src="gallery/MCP02711.jpg" alt="Running mates, shared energy" loading="lazy" width="800" height="600">
+      <figcaption>Running mates, shared energy</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02712.jpg">
+      <img src="gallery/MCP02712.jpg" alt="Laughs on the route" loading="lazy" width="800" height="600">
+      <figcaption>Laughs on the route</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02733.jpg">
+      <img src="gallery/MCP02733.jpg" alt="Peace signs at full speed" loading="lazy" width="800" height="600">
+      <figcaption>Peace signs at full speed</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02788.jpg">
+      <img src="gallery/MCP02788.jpg" alt="Side by side to the finish" loading="lazy" width="800" height="600">
+      <figcaption>Side by side to the finish</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02833.jpg">
+      <img src="gallery/MCP02833.jpg" alt="Family of runners — all ages, one race" loading="lazy" width="800" height="600">
+      <figcaption>Family of runners — all ages, one race</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02848.jpg">
+      <img src="gallery/MCP02848.jpg" alt="Smile of a finisher" loading="lazy" width="800" height="600">
+      <figcaption>Smile of a finisher</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02865.jpg">
+      <img src="gallery/MCP02865.jpg" alt="Partners in the 5K" loading="lazy" width="800" height="600">
+      <figcaption>Partners in the 5K</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP02866.jpg">
+      <img src="gallery/MCP02866.jpg" alt="Together on the road" loading="lazy" width="800" height="600">
+      <figcaption>Together on the road</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP03043.jpg">
+      <img src="gallery/MCP03043.jpg" alt="Medalists under the BSNL banner" loading="lazy" width="800" height="600">
+      <figcaption>Medalists under the BSNL banner</figcaption>
+    </figure>
+    <figure class="gal-item" data-full="gallery/MCP03407.jpg">
+      <img src="gallery/MCP03407.jpg" alt="Stage pride — medals & memories" loading="lazy" width="800" height="600">
+      <figcaption>Stage pride — medals & memories</figcaption>
+    </figure>
   </div>
+  <p class="gal-note">Tap any photo to view larger · Album will grow as more images are added</p>
 
-  <div style="text-align:center;">
-    <a href="https://photos.app.goo.gl/s16YEH1KFZAoTkTE7" target="_blank" class="btn-primary">📸 View Full Photo Album</a>
-  </div>
-
-  <div style="max-width:800px;margin:40px auto 0;background:var(--card);border:1px solid var(--line);box-shadow:0 8px 24px rgba(15,35,40,0.05);border-radius:20px;padding:40px 34px;text-align:center;">
-    <div style="font-size:40px;margin-bottom:14px;">🖼️</div>
-    <h3 style="font-size:19px;color:var(--ink);margin-bottom:10px;">Hundreds of Moments, All in One Place</h3>
-    <p style="color:var(--muted);font-size:14px;line-height:1.7;max-width:520px;margin:0 auto 26px;">
-      Every photo from Edition 1 — the warm-up, the run, the finish line, the celebrations — is in our shared Google Photos album. Browse, relive, and download your favorites.
-    </p>
-    <a href="https://photos.app.goo.gl/s16YEH1KFZAoTkTE7" target="_blank" class="btn-secondary">Open the Full Album →</a>
+  <div id="gal-lb" role="dialog" aria-label="Photo viewer">
+    <button type="button" class="lb-close" aria-label="Close">×</button>
+    <img src="" alt="">
+    <div class="lb-cap"></div>
   </div>
 </section>
 
@@ -1625,6 +1783,29 @@
       entries.forEach(e=>{ if(e.isIntersecting){ launchConfetti(); obs.disconnect(); } });
     }, { threshold: 0.25 });
     obs.observe(winnersSec);
+  })();
+
+
+  /* Gallery lightbox */
+  (function(){
+    const lb = document.getElementById('gal-lb');
+    if(!lb) return;
+    const lbImg = lb.querySelector('img');
+    const lbCap = lb.querySelector('.lb-cap');
+    const closeBtn = lb.querySelector('.lb-close');
+    document.querySelectorAll('.gal-item').forEach(fig=>{
+      fig.addEventListener('click', function(){
+        const img = fig.querySelector('img');
+        lbImg.src = fig.getAttribute('data-full') || img.src;
+        lbImg.alt = img.alt;
+        lbCap.textContent = img.alt || '';
+        lb.classList.add('open');
+      });
+    });
+    function close(){ lb.classList.remove('open'); lbImg.src = ''; }
+    closeBtn.addEventListener('click', function(e){ e.stopPropagation(); close(); });
+    lb.addEventListener('click', close);
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
   })();
 
 </script>
