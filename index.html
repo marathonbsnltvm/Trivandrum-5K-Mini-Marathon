@@ -616,6 +616,152 @@
     from{ opacity:0; transform:scale(0.88) translateY(16px); }
     to{ opacity:1; transform:scale(1) translateY(0); }
   }
+
+  /* ---------- WINNERS SHOWCASE ---------- */
+  #winners{
+    position:relative;
+  }
+  #winners .winners-hero{
+    text-align:center;
+    margin-bottom:40px;
+  }
+  #winners .winners-badge{
+    display:inline-block;
+    background:linear-gradient(135deg,#f5a623,#e8c547);
+    color:#1a1200;
+    font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+    padding:8px 18px;border-radius:30px;margin-bottom:14px;
+    box-shadow:0 6px 20px rgba(245,166,35,0.35);
+  }
+  .winners-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:28px;
+    margin-top:10px;
+  }
+  .winner-cat{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:28px 22px 24px;
+    box-shadow:0 12px 36px rgba(15,35,40,0.07);
+    position:relative;
+    overflow:hidden;
+    transition:transform .35s, box-shadow .35s;
+  }
+  .winner-cat:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 48px rgba(15,35,40,0.12);
+  }
+  .winner-cat::before{
+    content:'';
+    position:absolute;top:0;left:0;right:0;height:5px;
+    background:linear-gradient(90deg,var(--purple),var(--teal2));
+  }
+  .winner-cat.kids::before{ background:linear-gradient(90deg,#f5a623,#e8c547); }
+  .winner-cat.women::before{ background:linear-gradient(90deg,var(--teal),var(--teal2)); }
+  .winner-cat-title{
+    font-size:15px;font-weight:800;color:var(--ink);
+    text-align:center;margin-bottom:22px;
+    letter-spacing:0.3px;
+  }
+  .winner-cat-title span{
+    display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:4px;
+  }
+  .podium{
+    display:flex;align-items:flex-end;justify-content:center;gap:10px;
+    min-height:160px;margin-bottom:8px;
+  }
+  .podium-slot{
+    flex:1;max-width:100px;text-align:center;
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .podium-slot .medal{
+    font-size:28px;line-height:1;margin-bottom:6px;
+    filter:drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+    animation:medalBob 2.4s ease-in-out infinite;
+  }
+  .podium-slot:nth-child(1) .medal{ animation-delay:0s; }
+  .podium-slot:nth-child(2) .medal{ animation-delay:.15s; }
+  .podium-slot:nth-child(3) .medal{ animation-delay:.3s; }
+  .podium-slot .wname{
+    font-size:13px;font-weight:800;color:var(--ink);
+    line-height:1.25;margin-bottom:8px;min-height:2.5em;
+    display:flex;align-items:flex-end;justify-content:center;
+  }
+  .podium-bar{
+    width:100%;border-radius:10px 10px 4px 4px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:16px;color:#fff;
+    box-shadow:inset 0 -4px 0 rgba(0,0,0,0.12);
+  }
+  .podium-slot.first .podium-bar{
+    height:88px;
+    background:linear-gradient(180deg,#f5d76e 0%,#f5a623 40%,#d4890a 100%);
+  }
+  .podium-slot.second .podium-bar{
+    height:64px;
+    background:linear-gradient(180deg,#e8eef2 0%,#a8b4bc 45%,#7a8790 100%);
+  }
+  .podium-slot.third .podium-bar{
+    height:48px;
+    background:linear-gradient(180deg,#e8b896 0%,#c47a4a 45%,#9a5a32 100%);
+  }
+  .podium-slot.first .wname{ font-size:14px; color:var(--purple); }
+  @keyframes medalBob{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-5px); }
+  }
+  .winners-footer-note{
+    text-align:center;margin-top:36px;
+    font-size:14px;color:var(--muted);
+  }
+  .winners-footer-note strong{ color:var(--teal); }
+
+  @media(max-width:520px){
+    .podium{ gap:6px; }
+    .podium-slot .wname{ font-size:11px; }
+    .podium-slot.first .wname{ font-size:12px; }
+  }
+
+
+  /* Champion spotlight strip */
+  .champ-strip{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:16px;
+    margin:0 0 42px;
+    padding:22px 18px;
+    border-radius:22px;
+    background:
+      linear-gradient(135deg, rgba(245,166,35,0.12) 0%, rgba(91,44,130,0.08) 50%, rgba(31,122,116,0.1) 100%);
+    border:1px solid rgba(245,166,35,0.25);
+    box-shadow:0 12px 40px rgba(245,166,35,0.12);
+  }
+  .champ-pill{
+    text-align:center;
+    padding:16px 10px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.85);
+    border:1px solid rgba(245,166,35,0.2);
+    transition:transform .3s, box-shadow .3s;
+  }
+  .champ-pill:hover{
+    transform:translateY(-4px) scale(1.03);
+    box-shadow:0 10px 28px rgba(245,166,35,0.25);
+  }
+  .champ-pill .c-medal{ font-size:26px; margin-bottom:6px; }
+  .champ-pill .c-name{
+    font-size:14px;font-weight:800;color:var(--ink);line-height:1.25;
+  }
+  .champ-pill .c-cat{
+    font-size:10px;font-weight:700;color:var(--muted);
+    text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;
+  }
+  #winners-confetti{
+    position:fixed;inset:0;pointer-events:none;z-index:9998;
+  }
+
   body.splash-lock{ overflow:hidden; }
 
 </style>
@@ -654,6 +800,7 @@
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#categories">Categories</a>
+    <a href="#winners">Winners</a>
     <a href="#schedule">Schedule</a>
     <a href="#gallery">Gallery</a>
     <a href="#route">Route</a>
@@ -808,6 +955,156 @@
       <p style="font-size:28px;font-weight:900;color:#c47d0a;margin-top:6px;">₹1,000</p>
     </div>
   </div>
+</section>
+
+<section id="winners" class="reveal">
+  <div class="winners-hero">
+    <div class="winners-badge">🏆 Results Declared</div>
+    <h2 class="section-title">Champions of BSNL 5K 2026</h2>
+    <p class="section-sub">The podium is set. Honouring every runner who gave their best on 11 October.</p>
+  </div>
+
+  <div class="champ-strip" aria-label="Gold medalists">
+    <div class="champ-pill">
+      <div class="c-medal">🥇</div>
+      <div class="c-name">Karan Singh</div>
+      <div class="c-cat">Men 15–45</div>
+    </div>
+    <div class="champ-pill">
+      <div class="c-medal">🥇</div>
+      <div class="c-name">S. Nair</div>
+      <div class="c-cat">Men 45+</div>
+    </div>
+    <div class="champ-pill">
+      <div class="c-medal">🥇</div>
+      <div class="c-name">Reshma Gomez</div>
+      <div class="c-cat">Women 15–45</div>
+    </div>
+    <div class="champ-pill">
+      <div class="c-medal">🥇</div>
+      <div class="c-name">Zoja Ziya</div>
+      <div class="c-cat">Women 45+</div>
+    </div>
+    <div class="champ-pill">
+      <div class="c-medal">🥇</div>
+      <div class="c-name">Nihan Mohammed</div>
+      <div class="c-cat">Kids</div>
+    </div>
+  </div>
+
+  <div class="winners-grid">
+    <!-- Men 15-45 -->
+    <div class="winner-cat">
+      <div class="winner-cat-title">Men <span>15 – 45 Years</span></div>
+      <div class="podium">
+        <div class="podium-slot second">
+          <div class="medal">🥈</div>
+          <div class="wname">Selin</div>
+          <div class="podium-bar">2</div>
+        </div>
+        <div class="podium-slot first">
+          <div class="medal">🥇</div>
+          <div class="wname">Karan Singh</div>
+          <div class="podium-bar">1</div>
+        </div>
+        <div class="podium-slot third">
+          <div class="medal">🥉</div>
+          <div class="wname">Sonaram Hessa</div>
+          <div class="podium-bar">3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Men 45+ -->
+    <div class="winner-cat">
+      <div class="winner-cat-title">Men <span>Above 45 Years</span></div>
+      <div class="podium">
+        <div class="podium-slot second">
+          <div class="medal">🥈</div>
+          <div class="wname">Biju S. L.</div>
+          <div class="podium-bar">2</div>
+        </div>
+        <div class="podium-slot first">
+          <div class="medal">🥇</div>
+          <div class="wname">S. Nair</div>
+          <div class="podium-bar">1</div>
+        </div>
+        <div class="podium-slot third">
+          <div class="medal">🥉</div>
+          <div class="wname">Benroy S. S.</div>
+          <div class="podium-bar">3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Women 15-45 -->
+    <div class="winner-cat women">
+      <div class="winner-cat-title">Women <span>15 – 45 Years</span></div>
+      <div class="podium">
+        <div class="podium-slot second">
+          <div class="medal">🥈</div>
+          <div class="wname">Rayan H.</div>
+          <div class="podium-bar">2</div>
+        </div>
+        <div class="podium-slot first">
+          <div class="medal">🥇</div>
+          <div class="wname">Reshma Gomez</div>
+          <div class="podium-bar">1</div>
+        </div>
+        <div class="podium-slot third">
+          <div class="medal">🥉</div>
+          <div class="wname">Babitha S.</div>
+          <div class="podium-bar">3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Women 45+ -->
+    <div class="winner-cat women">
+      <div class="winner-cat-title">Women <span>Above 45 Years</span></div>
+      <div class="podium">
+        <div class="podium-slot second">
+          <div class="medal">🥈</div>
+          <div class="wname">Revathy</div>
+          <div class="podium-bar">2</div>
+        </div>
+        <div class="podium-slot first">
+          <div class="medal">🥇</div>
+          <div class="wname">Zoja Ziya</div>
+          <div class="podium-bar">1</div>
+        </div>
+        <div class="podium-slot third">
+          <div class="medal">🥉</div>
+          <div class="wname">Priya</div>
+          <div class="podium-bar">3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kids -->
+    <div class="winner-cat kids" style="grid-column:1 / -1;max-width:420px;margin:0 auto;width:100%;">
+      <div class="winner-cat-title">🧒 Kids Category <span>Under 15 Years</span></div>
+      <div class="podium">
+        <div class="podium-slot second">
+          <div class="medal">🥈</div>
+          <div class="wname">Joel Jobin</div>
+          <div class="podium-bar">2</div>
+        </div>
+        <div class="podium-slot first">
+          <div class="medal">🥇</div>
+          <div class="wname">Nihan Mohammed</div>
+          <div class="podium-bar">1</div>
+        </div>
+        <div class="podium-slot third">
+          <div class="medal">🥉</div>
+          <div class="wname">Vinson Roy</div>
+          <div class="podium-bar">3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="winners-footer-note">Congratulations to all finishers — <strong>every runner is a champion</strong> of BSNL 5K Mini Marathon 2026.</p>
 </section>
 
 <section id="schedule" class="reveal">
@@ -1269,6 +1566,67 @@
     }
     setTimeout(function(){ clearInterval(funTimer); }, DURATION + 200);
   })();
+
+  /* Confetti when winners section appears */
+  (function(){
+    const winnersSec = document.getElementById('winners');
+    if(!winnersSec) return;
+    let fired = false;
+    function launchConfetti(){
+      if(fired) return;
+      fired = true;
+      const canvas = document.createElement('canvas');
+      canvas.id = 'winners-confetti-layer';
+      document.body.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+      const colors = ['#f5a623','#e30613','#5b2c82','#28a79f','#ffffff','#f5d76e','#7c4fa6'];
+      const pieces = [];
+      for(let i=0;i<120;i++){
+        pieces.push({
+          x: Math.random()*canvas.width,
+          y: Math.random()*-canvas.height*0.5,
+          w: 6+Math.random()*8,
+          h: 8+Math.random()*10,
+          color: colors[(Math.random()*colors.length)|0],
+          vy: 2+Math.random()*4,
+          vx: -2+Math.random()*4,
+          rot: Math.random()*Math.PI,
+          vr: -0.1+Math.random()*0.2
+        });
+      }
+      let frames = 0;
+      function frame(){
+        frames++;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        let alive = false;
+        pieces.forEach(p=>{
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.04;
+          p.rot += p.vr;
+          if(p.y < canvas.height+20) alive = true;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = Math.max(0, 1 - frames/180);
+          ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+          ctx.restore();
+        });
+        if(alive && frames < 200) requestAnimationFrame(frame);
+        else { canvas.remove(); window.removeEventListener('resize', resize); }
+      }
+      requestAnimationFrame(frame);
+    }
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ launchConfetti(); obs.disconnect(); } });
+    }, { threshold: 0.25 });
+    obs.observe(winnersSec);
+  })();
+
 </script>
 
 </body>
