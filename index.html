@@ -26,6 +26,8 @@
     background:var(--bg);
     color:var(--ink);
     overflow-x:hidden;
+    width:100%;
+    margin:0;
   }
   a{ text-decoration:none; }
   img{ max-width:100%; display:block; }
@@ -230,6 +232,28 @@
 
   /* ---------- SECTION WRAP ---------- */
   section{ padding:90px 6%; max-width:1200px; margin:0 auto; }
+  /* Full-bleed sections — edge to edge */
+  section.hero,
+  section.thanks-banner,
+  section#register{
+    max-width:none;
+    width:100%;
+    margin-left:0;
+    margin-right:0;
+  }
+  section.hero{
+    padding:120px 6% 90px;
+  }
+  section.thanks-banner{
+    padding:56px 6% 52px;
+  }
+  section#register{
+    padding:0;
+  }
+  section#register .cta-box{
+    border-radius:0;
+    max-width:none;
+  }
   .section-title{ text-align:center; font-size:clamp(28px,4vw,40px); font-weight:800; margin-bottom:12px; color:var(--ink); }
   .section-sub{ text-align:center; color:var(--muted); max-width:560px; margin:0 auto 55px; font-size:15px; }
 
